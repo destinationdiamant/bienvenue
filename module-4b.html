@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>4b — Adhésion, Pack & Z4F · Destination 💎</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dd-style.css">
+<style>
+/* Kits partenaire */
+.kits-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1.2rem 0 1.5rem; }
+@media(max-width:600px){ .kits-grid { grid-template-columns:1fr; } }
+.kit-card { background:var(--card); border:2px solid var(--border); border-radius:var(--radius); padding:1.3rem 1.2rem; box-shadow:var(--shadow); text-align:center; transition:transform .2s; }
+.kit-card:hover { transform:translateY(-3px); }
+.kit-card.recommended { border-color:var(--gold); background:linear-gradient(135deg,var(--gold-lt),#fff); }
+.kit-badge { font-family:'Syne',sans-serif; font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:.2rem .6rem; border-radius:20px; display:inline-block; margin-bottom:.7rem; }
+.kb-basic { background:#EDE9FE; color:var(--vm); }
+.kb-advanced { background:#D1FAE5; color:#065F46; }
+.kb-ultimate { background:linear-gradient(135deg,var(--gold),#E8C56A); color:#1E0B40; }
+.kit-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+.kit-desc { font-family:'Playfair Display',serif; font-size:var(--fs-sm); color:var(--text2); line-height:1.55; }
+.kit-recomm { font-family:'Syne',sans-serif; font-size:var(--fs-xs); font-weight:800; color:var(--gold); margin-top:.6rem; }
+
+/* Z4F visuel */
+.z4f-block { background:linear-gradient(135deg,#1E0B40,#3B1F7A); border-radius:18px; padding:2rem; margin:1.5rem 0; }
+.z4f-block h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--gold); margin-bottom:.6rem; }
+.z4f-steps { display:grid; gap:.8rem; margin-top:1rem; }
+.z4f-step { display:flex; align-items:flex-start; gap:.9rem; background:rgba(255,255,255,.08); border-radius:10px; padding:.85rem 1rem; }
+.zs-num { width:32px; height:32px; background:var(--gold); color:#1E0B40; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-weight:800; font-size:.85rem; flex-shrink:0; }
+.zs-text { font-family:'Playfair Display',serif; font-size:var(--fs-sm); color:rgba(255,255,255,.9); line-height:1.6; }
+.zs-text strong { color:var(--gold); }
+
+/* Timeline commande */
+.commande-tl { display:grid; gap:.6rem; margin:1.2rem 0 1.5rem; }
+.ct-item { display:grid; grid-template-columns:60px 1fr; gap:.8rem; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:.75rem 1rem; box-shadow:var(--shadow); }
+.ct-step { font-family:'Syne',sans-serif; font-weight:800; font-size:.72rem; color:var(--vm); text-transform:uppercase; letter-spacing:.04em; text-align:center; }
+.ct-text { font-family:'Playfair Display',serif; font-size:var(--fs-sm); color:var(--text); line-height:1.55; }
+</style>
+</head>
+<body>
+
+<script>function ddCheckPw(){var v=document.getElementById("pw-input").value;if(v==="Diamant"){localStorage.setItem("dd_auth","1");document.getElementById("pw-overlay").style.display="none";}else{document.getElementById("pw-err").style.display="block";document.getElementById("pw-input").value="";}}if(localStorage.getItem("dd_auth")==="1"){document.getElementById("pw-overlay").style.display="none";}document.addEventListener("keydown",function(e){if(e.key==="Enter")ddCheckPw();});</script>
+
+<div id="pw-overlay"><div class="pw-box"><span class="pw-gem">💎</span><h1 class="pw-title">Destination Diamant</h1><p class="pw-sub">Formation partenaire — Espace privé</p><input type="password" class="pw-input" id="pw-input" placeholder="Mot de passe" autocomplete="off"><button class="pw-btn" id="pw-btn" onclick="ddCheckPw()">Accéder à la formation →</button><p class="pw-err" id="pw-err">Mot de passe incorrect. Réessayez.</p></div></div>
+
+<div id="srch-ov"><div id="srch-box"><div class="srch-top"><span class="srch-icon">🔍</span><input type="text" id="srch-input" placeholder="Rechercher dans toute la formation…" oninput="ddDoSearch(this.value)" autocomplete="off"><button class="srch-close" onclick="ddCloseSrch()">✕</button></div><div id="srch-results"><div class="srch-hint">Tapez un mot-clé pour chercher dans tous les modules</div></div></div></div>
+
+<header>
+  <button class="hdr-menu-btn" onclick="ddToggleSidebar()"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="16" width="22" height="2" rx="1" fill="currentColor"/></svg></button>
+  <a class="hdr-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="hdr-spacer"></div>
+  <button class="hdr-btn" id="audio-btn" onclick="ddToggleAudio()">🔊 Écouter</button>
+  <button class="hdr-btn" onclick="ddOpenSrch()">🔍 Rechercher</button>
+</header>
+
+<div id="sb-overlay"></div>
+<div class="layout">
+
+<aside id="sidebar">
+  <a class="sb-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="sb-progress-label" id="sb-pct-label">0% complété</div>
+  <div class="sb-progress"><div class="sb-progress-fill" id="sb-pfill" style="width:0%"></div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">01</span> Bienvenue — Mes Fondations<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-1-1.html"><span class="sb-item-num">1.1</span> Mon Engagement & Ma Décision<span class="sb-chk" data-id="m1-1" onclick="ddToggleChk(event,'m1-1')"></span></a>
+    <a class="sb-item" href="module-1-2.html"><span class="sb-item-num">1.2</span> Mon Pourquoi<span class="sb-chk" data-id="m1-2" onclick="ddToggleChk(event,'m1-2')"></span></a>
+    <a class="sb-item" href="module-1-3.html"><span class="sb-item-num">1.3</span> Mes Rêves & Objectifs SMART<span class="sb-chk" data-id="m1-3" onclick="ddToggleChk(event,'m1-3')"></span></a>
+    <a class="sb-item" href="module-1-4.html"><span class="sb-item-num">1.4</span> Ma Planification & Agenda<span class="sb-chk" data-id="m1-4" onclick="ddToggleChk(event,'m1-4')"></span></a>
+    <a class="sb-item" href="module-1-5.html"><span class="sb-item-num">1.5</span> Mon Histoire Produit<span class="sb-chk" data-id="m1-5" onclick="ddToggleChk(event,'m1-5')"></span></a>
+    <a class="sb-item" href="module-1-6.html"><span class="sb-item-num">1.6</span> Histoire de l'Entreprise<span class="sb-chk" data-id="m1-6" onclick="ddToggleChk(event,'m1-6')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">02</span> Les 33 Erreurs<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-2.html"><span class="sb-item-num">2</span> Les 33 erreurs à éviter<span class="sb-chk" data-id="m2" onclick="ddToggleChk(event,'m2')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">03</span> Prospection Organique<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-3a.html"><span class="sb-item-num">3a</span> La Liste de Noms<span class="sb-chk" data-id="m3a" onclick="ddToggleChk(event,'m3a')"></span></a>
+    <a class="sb-item" href="module-3b.html"><span class="sb-item-num">3b</span> L'Édification<span class="sb-chk" data-id="m3b" onclick="ddToggleChk(event,'m3b')"></span></a>
+    <a class="sb-item" href="module-3c.html"><span class="sb-item-num">3c</span> L'Invitation<span class="sb-chk" data-id="m3c" onclick="ddToggleChk(event,'m3c')"></span></a>
+    <a class="sb-item" href="module-3d.html"><span class="sb-item-num">3d</span> Les Objections<span class="sb-chk" data-id="m3d" onclick="ddToggleChk(event,'m3d')"></span></a>
+    <a class="sb-item" href="module-3e.html"><span class="sb-item-num">3e</span> Bibliothèque & Culture MLM<span class="sb-chk" data-id="m3e" onclick="ddToggleChk(event,'m3e')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr open" onclick="ddToggleGroup(this)"><span class="sb-mod-num">04</span> Démarrage<span class="sb-arrow">▶</span></div><div class="sb-items open">
+    <a class="sb-item" href="module-4a.html"><span class="sb-item-num">4a</span> Inscription & Statut<span class="sb-chk" data-id="m4a" onclick="ddToggleChk(event,'m4a')"></span></a>
+    <a class="sb-item active" href="module-4b.html"><span class="sb-item-num">4b</span> Adhésion, Pack & Z4F<span class="sb-chk" data-id="m4b" onclick="ddToggleChk(event,'m4b')"></span></a>
+    <a class="sb-item" href="module-4c.html"><span class="sb-item-num">4c</span> Fast Start<span class="sb-chk" data-id="m4c" onclick="ddToggleChk(event,'m4c')"></span></a>
+    <a class="sb-item" href="module-4d.html"><span class="sb-item-num">4d</span> Règles & Outils<span class="sb-chk" data-id="m4d" onclick="ddToggleChk(event,'m4d')"></span></a>
+    <a class="sb-item" href="module-4e.html"><span class="sb-item-num">4e</span> Inauguration<span class="sb-chk" data-id="m4e" onclick="ddToggleChk(event,'m4e')"></span></a>
+    <a class="sb-item" href="module-4f.html"><span class="sb-item-num">4f</span> Les Événements<span class="sb-chk" data-id="m4f" onclick="ddToggleChk(event,'m4f')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">4★</span> Les Outils<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-4bis.html"><span class="sb-item-num">4★</span> Mes Outils & Ressources<span class="sb-chk" data-id="m4bis" onclick="ddToggleChk(event,'m4bis')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">05</span> La Présentation & Closing</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">06</span> Plan de Rémunération</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">07</span> Prospection Réseaux Sociaux</div></div>
+</aside>
+
+<main id="main-content">
+
+  <div class="mod-hero">
+    <div class="mod-hero-badge">🚀 Module 4 · Chapitre b</div>
+    <h1>Adhésion, Pack<br>&amp; <em>Zinzino4Free</em></h1>
+    <p class="mod-hero-sub">Votre premier achat est votre premier acte de partenaire. Il vous positionne comme consommateur authentique et déclenche votre programme Fast Start.</p>
+  </div>
+
+  <div class="video-wrap">
+    <div class="video-label">🎬 Vidéo du chapitre</div>
+    <!-- REMPLACER par : <iframe class="video-iframe" src="https://www.youtube.com/embed/XXXXXXXX" allowfullscreen></iframe> -->
+    <div class="video-placeholder"><span class="vp-icon">▶️</span><span class="vp-txt">Vidéo à venir — remplacez ce bloc par un iframe YouTube</span></div>
+  </div>
+
+  <div class="action-bar">
+    <!-- REMPLACER href="#" par le lien Google Doc du chapitre -->
+    <a class="action-btn primary" href="#" target="_blank">📥 Télécharger le document</a>
+    <button class="action-btn" onclick="ddMarkDone('m4b',this)">✅ Marquer comme lu</button>
+  </div>
+
+  <div class="slbl">L'adhésion — votre première étape</div>
+
+  <p>Pour devenir partenaire actif, vous devez vous inscrire via le back-office de Zinzino et choisir un kit de démarrage (Acquisition Kit Partenaire). Ce kit est votre investissement de départ — il contient les produits que vous allez consommer et tester vous-même.</p>
+
+  <div class="hl"><strong>La règle d'or :</strong> Être le produit du produit. Votre propre expérience et vos propres résultats de test sont votre meilleur outil commercial. Commandez ce que vous allez consommer et recommander.</div>
+
+  <div class="slbl">Les 3 kits partenaire</div>
+
+  <div class="kits-grid">
+    <div class="kit-card">
+      <span class="kit-badge kb-basic">Basic</span>
+      <div class="kit-name">Kit Basic</div>
+      <div class="kit-desc">Le kit d'entrée. Contient les produits essentiels pour démarrer votre expérience personnelle et votre activité.</div>
+    </div>
+    <div class="kit-card recommended">
+      <span class="kit-badge kb-advanced">Advanced ⭐</span>
+      <div class="kit-name">Kit Advanced</div>
+      <div class="kit-desc">Le kit le plus populaire. Meilleur rapport investissement/crédits Fast Start. Recommandé pour un démarrage solide.</div>
+      <div class="kit-recomm">✦ Recommandé par votre sponsor</div>
+    </div>
+    <div class="kit-card">
+      <span class="kit-badge kb-ultimate">Ultimate 💎</span>
+      <div class="kit-name">Kit Ultimate</div>
+      <div class="kit-desc">Le kit premium. Maximum de crédits Fast Start, maximum de produits. Pour un démarrage ambitieux et immédiat.</div>
+    </div>
+  </div>
+
+  <div class="mbox">
+    <div class="mt">💡 Quel kit choisir ?</div>
+    <div class="mtxt">Parlez-en avec votre sponsor avant de commander. Il connaît votre situation et peut vous guider vers le kit le plus adapté à vos objectifs Fast Start. Les crédits générés par votre kit influencent directement votre progression dans les 120 premiers jours.</div>
+  </div>
+
+  <div class="slbl">Zinzino4Free (Z4F) — obtenez votre abonnement gratuit</div>
+
+  <div class="z4f-block">
+    <h3>🎁 Le principe Zinzino4Free</h3>
+    <p style="color:rgba(255,255,255,.7);font-size:var(--fs-sm);margin-bottom:1rem;font-family:'Playfair Display',serif;">Aimez-le. Partagez-le. Obtenez des produits gratuits.</p>
+    <div class="z4f-steps">
+      <div class="z4f-step"><div class="zs-num">1</div><div class="zs-text">Inscrivez-vous pour un kit <strong>Z4F Auto Order</strong> — votre abonnement mensuel personnel aux produits.</div></div>
+      <div class="z4f-step"><div class="zs-num">2</div><div class="zs-text">Inscrivez <strong>au moins 4 clients</strong> à un Premier Kit (abonnement mensuel). Leurs Credits combinés doivent être ≥ 40 Credits.</div></div>
+      <div class="z4f-step"><div class="zs-num">3</div><div class="zs-text">Bénéficiez de votre propre abonnement mensuel <strong>gratuitement</strong> — vous ne payez que les frais de port.</div></div>
+    </div>
+    <div style="background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:.85rem 1rem;margin-top:1rem;">
+      <div style="font-family:'Syne',sans-serif;font-size:var(--fs-xs);font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;">💎 Pendant les 4 premiers mois</div>
+      <div style="font-family:'Playfair Display',serif;font-size:var(--fs-sm);color:rgba(255,255,255,.85);line-height:1.6;">Vous bénéficiez d'une réduction de 50% sur les Credits nécessaires — c'est la période de grâce. Profitez-en pour installer vos 4 premiers clients rapidement.</div>
+    </div>
+  </div>
+
+  <div class="slbl">Comment créer une commande client — les étapes</div>
+
+  <div class="commande-tl">
+    <div class="ct-item"><div class="ct-step">Étape 1</div><div class="ct-text">Connectez-vous à votre Back-Office sur zinzino.com → Boutique ou "Enregistrer un nouveau client"</div></div>
+    <div class="ct-item"><div class="ct-step">Étape 2</div><div class="ct-text">Sélectionnez le type de commande : <strong>Client</strong> (recommandé) ou <strong>Partenaire</strong>. Un client n'a pas à gérer de business — il commande et reçoit ses produits.</div></div>
+    <div class="ct-item"><div class="ct-step">Étape 3</div><div class="ct-text">Choisissez le <strong>Premier Kit</strong> adapté à votre client (BalanceOil, Zinobiotic, etc.). Le Premier Kit inclut le BalanceTest initial.</div></div>
+    <div class="ct-item"><div class="ct-step">Étape 4</div><div class="ct-step">Configurez l'<strong>Auto Order</strong> (commande automatique mensuelle). C'est ce qui rend le client actif et génère vos Credits récurrents.</div></div>
+    <div class="ct-item"><div class="ct-step">Étape 5</div><div class="ct-text">Le client reçoit un email de confirmation et accède à son espace personnel pour suivre ses commandes et son BalanceTest.</div></div>
+  </div>
+
+  <div class="slbl">La livraison tous les 2 mois</div>
+
+  <div class="mbox">
+    <div class="mt">📦 Livraison bi-mensuelle — moins d'empreinte carbone</div>
+    <div class="mtxt">Zinzino regroupe les commandes mensuelles en une seule livraison tous les 2 mois avec le double du contenu. Cela réduit de moitié les frais de port et l'impact environnemental. Votre client paie chaque mois mais reçoit sa commande tous les 2 mois.</div>
+  </div>
+
+  <div class="slbl">Mes actions</div>
+  <ul class="checklist">
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai choisi mon kit de démarrage (Basic / Advanced / Ultimate) avec mon sponsor</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai effectué ma première commande partenaire dans le Back-Office</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai activé mon abonnement Z4F Auto Order</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je comprends le principe du Zinzino4Free et l'objectif de 4 clients</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je sais comment créer une commande pour un client dans le Back-Office</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je suis prêt(e) à passer au chapitre suivant : Fast Start</li>
+  </ul>
+
+  <div class="nav-btns">
+    <a class="nav-btn nav-btn-prev" href="module-4a.html">← 4a Inscription & Statut</a>
+    <a class="nav-btn nav-btn-next" href="module-4c.html">4c — Fast Start →</a>
+  </div>
+
+</main>
+</div>
+
+<script src="search-index.js"></script>
+<script src="dd-app.js"></script>
+<script>ddInit('m4b');</script>
+</body>
+</html>

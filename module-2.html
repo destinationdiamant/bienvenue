@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Module 2 — Les 33 Erreurs · Destination 💎</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dd-style.css">
+<style>
+/* Filtres catégories */
+.cat-filters {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin: 1.2rem 0 1.5rem;
+}
+.cat-btn {
+  padding: .4rem .9rem;
+  border-radius: 20px; border: 1.5px solid var(--border);
+  background: var(--card); color: var(--text2);
+  font-family: 'Syne', sans-serif; font-size: var(--fs-xs);
+  font-weight: 700; cursor: pointer; transition: all .18s;
+}
+.cat-btn:hover, .cat-btn.active {
+  background: var(--vm); color: #fff; border-color: var(--vm);
+}
+
+/* Compteur */
+.erreur-counter {
+  background: var(--vm-pale); border: 1px solid var(--vm-light);
+  border-radius: 12px; padding: .8rem 1.2rem;
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.ec-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900; color: var(--vm);
+  line-height: 1;
+}
+.ec-label { font-family: 'Syne', sans-serif; font-size: var(--fs-xs); font-weight: 700; color: var(--text2); }
+.ec-bar { flex: 1; min-width: 120px; background: var(--vm-light); border-radius: 20px; height: 8px; overflow: hidden; }
+.ec-fill { height: 100%; background: linear-gradient(90deg, var(--vm), var(--gold)); border-radius: 20px; transition: width .4s; }
+
+/* Grille erreurs */
+.erreurs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem; margin-bottom: 2rem;
+}
+@media(max-width: 500px) { .erreurs-grid { grid-template-columns: 1fr; } }
+
+.erreur-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s;
+  cursor: pointer; position: relative;
+}
+.erreur-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(124,58,237,.12); }
+.erreur-card.lu { border-color: #86EFAC; }
+.erreur-card.lu .ec-num-badge { background: #22C55E; }
+
+.ec-num-badge {
+  position: absolute; top: .8rem; right: .8rem;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--vm-light); color: var(--vm);
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: .68rem; display: flex; align-items: center;
+  justify-content: center; transition: background .2s;
+}
+.erreur-card.lu .ec-num-badge { color: white; }
+
+.ec-cat-tag {
+  padding: .4rem .9rem;
+  font-family: 'Syne', sans-serif; font-size: .65rem;
+  font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+}
+.cat-mindset  { background: #EDE9FE; color: #4C1D95; }
+.cat-action   { background: #D1FAE5; color: #065F46; }
+.cat-relation { background: #FEF3C7; color: #92400E; }
+.cat-systeme  { background: #E0F2FE; color: #0C4A6E; }
+.cat-mental   { background: #FEE2E2; color: #991B1B; }
+
+.ec-body { padding: .9rem 1rem 1rem; }
+.ec-erreur {
+  font-family: 'Playfair Display', serif;
+  font-size: .95rem; font-weight: 700;
+  color: var(--text); margin-bottom: .6rem; line-height: 1.4;
+  padding-right: 1.8rem;
+}
+.ec-solution {
+  background: var(--vm-pale); border-left: 3px solid var(--vm);
+  border-radius: 0 8px 8px 0; padding: .6rem .8rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); color: var(--text); line-height: 1.55;
+}
+.ec-solution::before {
+  content: '👉 '; font-style: normal;
+}
+
+.ec-check {
+  display: flex; align-items: center; gap: .5rem;
+  margin-top: .7rem; padding-top: .7rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Syne', sans-serif; font-size: var(--fs-xs);
+  font-weight: 700; color: var(--text2); cursor: pointer;
+}
+.ec-check .chk {
+  width: 18px; height: 18px; border: 1.5px solid var(--border);
+  border-radius: 4px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; transition: all .15s;
+}
+.erreur-card.lu .ec-check .chk { background: #22C55E; border-color: #22C55E; color: white; }
+
+/* Print link */
+.print-link {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--gold-lt); border: 1px solid rgba(201,168,76,.3);
+  border-radius: 10px; padding: .75rem 1.2rem;
+  font-family: 'Syne', sans-serif; font-size: var(--fs-sm);
+  font-weight: 700; color: #92400E; text-decoration: none;
+  transition: all .18s; margin-bottom: 1.5rem;
+}
+.print-link:hover { background: var(--gold); color: #1E0B40; }
+</style>
+</head>
+<body>
+
+<script>function ddCheckPw(){var v=document.getElementById("pw-input").value;if(v==="Diamant"){localStorage.setItem("dd_auth","1");document.getElementById("pw-overlay").style.display="none";}else{document.getElementById("pw-err").style.display="block";document.getElementById("pw-input").value="";}}if(localStorage.getItem("dd_auth")==="1"){document.getElementById("pw-overlay").style.display="none";}document.addEventListener("keydown",function(e){if(e.key==="Enter")ddCheckPw();});</script>
+
+<div id="pw-overlay"><div class="pw-box"><span class="pw-gem">💎</span><h1 class="pw-title">Destination Diamant</h1><p class="pw-sub">Formation partenaire — Espace privé</p><input type="password" class="pw-input" id="pw-input" placeholder="Mot de passe" autocomplete="off"><button class="pw-btn" id="pw-btn" onclick="ddCheckPw()">Accéder à la formation →</button><p class="pw-err" id="pw-err">Mot de passe incorrect. Réessayez.</p></div></div>
+
+<div id="srch-ov"><div id="srch-box"><div class="srch-top"><span class="srch-icon">🔍</span><input type="text" id="srch-input" placeholder="Rechercher dans toute la formation…" oninput="ddDoSearch(this.value)" autocomplete="off"><button class="srch-close" onclick="ddCloseSrch()">✕</button></div><div id="srch-results"><div class="srch-hint">Tapez un mot-clé pour chercher dans tous les modules</div></div></div></div>
+
+<header>
+  <button class="hdr-menu-btn" onclick="ddToggleSidebar()"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="16" width="22" height="2" rx="1" fill="currentColor"/></svg></button>
+  <a class="hdr-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="hdr-spacer"></div>
+  <button class="hdr-btn" id="audio-btn" onclick="ddToggleAudio()">🔊 Écouter</button>
+  <button class="hdr-btn" onclick="ddOpenSrch()">🔍 Rechercher</button>
+</header>
+
+<div id="sb-overlay"></div>
+<div class="layout">
+
+<aside id="sidebar">
+  <a class="sb-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="sb-progress-label" id="sb-pct-label">0% complété</div>
+  <div class="sb-progress"><div class="sb-progress-fill" id="sb-pfill" style="width:0%"></div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">01</span> Bienvenue — Mes Fondations<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-1-1.html"><span class="sb-item-num">1.1</span> Mon Engagement & Ma Décision<span class="sb-chk" data-id="m1-1" onclick="ddToggleChk(event,'m1-1')"></span></a>
+    <a class="sb-item" href="module-1-2.html"><span class="sb-item-num">1.2</span> Mon Pourquoi<span class="sb-chk" data-id="m1-2" onclick="ddToggleChk(event,'m1-2')"></span></a>
+    <a class="sb-item" href="module-1-3.html"><span class="sb-item-num">1.3</span> Mes Rêves & Objectifs SMART<span class="sb-chk" data-id="m1-3" onclick="ddToggleChk(event,'m1-3')"></span></a>
+    <a class="sb-item" href="module-1-4.html"><span class="sb-item-num">1.4</span> Ma Planification & Agenda<span class="sb-chk" data-id="m1-4" onclick="ddToggleChk(event,'m1-4')"></span></a>
+    <a class="sb-item" href="module-1-5.html"><span class="sb-item-num">1.5</span> Mon Histoire Produit<span class="sb-chk" data-id="m1-5" onclick="ddToggleChk(event,'m1-5')"></span></a>
+    <a class="sb-item" href="module-1-6.html"><span class="sb-item-num">1.6</span> Histoire de l'Entreprise<span class="sb-chk" data-id="m1-6" onclick="ddToggleChk(event,'m1-6')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr open" onclick="ddToggleGroup(this)"><span class="sb-mod-num">02</span> Les 33 Erreurs<span class="sb-arrow">▶</span></div><div class="sb-items open"><a class="sb-item active" href="module-2.html"><span class="sb-item-num">2</span> Les 33 erreurs à éviter<span class="sb-chk" data-id="m2" onclick="ddToggleChk(event,'m2')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">03</span> Prospection Organique<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-3a.html"><span class="sb-item-num">3a</span> La Liste de Noms<span class="sb-chk" data-id="m3a" onclick="ddToggleChk(event,'m3a')"></span></a>
+    <a class="sb-item" href="module-3b.html"><span class="sb-item-num">3b</span> L'Édification<span class="sb-chk" data-id="m3b" onclick="ddToggleChk(event,'m3b')"></span></a>
+    <a class="sb-item" href="module-3c.html"><span class="sb-item-num">3c</span> L'Invitation<span class="sb-chk" data-id="m3c" onclick="ddToggleChk(event,'m3c')"></span></a>
+    <a class="sb-item" href="module-3d.html"><span class="sb-item-num">3d</span> Les Objections<span class="sb-chk" data-id="m3d" onclick="ddToggleChk(event,'m3d')"></span></a>
+    <a class="sb-item" href="module-3e.html"><span class="sb-item-num">3e</span> Bibliothèque & Culture MLM<span class="sb-chk" data-id="m3e" onclick="ddToggleChk(event,'m3e')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">04</span> Démarrage<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-4a.html"><span class="sb-item-num">4a</span> Inscription & Statut<span class="sb-chk" data-id="m4a" onclick="ddToggleChk(event,'m4a')"></span></a>
+    <a class="sb-item" href="module-4b.html"><span class="sb-item-num">4b</span> Adhésion, Pack & Z4F<span class="sb-chk" data-id="m4b" onclick="ddToggleChk(event,'m4b')"></span></a>
+    <a class="sb-item" href="module-4c.html"><span class="sb-item-num">4c</span> Fast Start<span class="sb-chk" data-id="m4c" onclick="ddToggleChk(event,'m4c')"></span></a>
+    <a class="sb-item" href="module-4d.html"><span class="sb-item-num">4d</span> Règles & Outils<span class="sb-chk" data-id="m4d" onclick="ddToggleChk(event,'m4d')"></span></a>
+    <a class="sb-item" href="module-4e.html"><span class="sb-item-num">4e</span> Inauguration<span class="sb-chk" data-id="m4e" onclick="ddToggleChk(event,'m4e')"></span></a>
+    <a class="sb-item" href="module-4f.html"><span class="sb-item-num">4f</span> Les Événements<span class="sb-chk" data-id="m4f" onclick="ddToggleChk(event,'m4f')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">4★</span> Les Outils<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-4bis.html"><span class="sb-item-num">4★</span> Mes Outils & Ressources<span class="sb-chk" data-id="m4bis" onclick="ddToggleChk(event,'m4bis')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">05</span> La Présentation & Closing</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">06</span> Plan de Rémunération</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">07</span> Prospection Réseaux Sociaux</div></div>
+</aside>
+
+<main id="main-content">
+
+  <div class="mod-hero">
+    <div class="mod-hero-badge">⚠️ Module 2 · Les pièges à éviter</div>
+    <h1>Les <em>33 Erreurs</em><br>& leurs solutions</h1>
+    <p class="mod-hero-sub">Chaque erreur sur cette liste a déjà coûté du temps, de l'énergie et des opportunités à des partenaires avant vous. Les connaître, c'est les éviter.</p>
+  </div>
+
+  <div class="video-wrap">
+    <div class="video-label">🎬 Vidéo du module</div>
+    <!-- REMPLACER par : <iframe class="video-iframe" src="https://www.youtube.com/embed/XXXXXXXX" allowfullscreen></iframe> -->
+    <div class="video-placeholder"><span class="vp-icon">▶️</span><span class="vp-txt">Vidéo à venir — remplacez ce bloc par un iframe YouTube</span></div>
+  </div>
+
+  <div class="action-bar">
+    <a class="action-btn primary" href="https://docs.google.com/document/d/1d0U3OkMoyH6pJFFB6PhaO__bK4oTJzZxn1w5e99_Eng/edit?usp=sharing" target="_blank">📥 Télécharger / Imprimer le document</a>
+    <button class="action-btn" onclick="ddMarkDone('m2',this)">✅ Marquer comme lu</button>
+  </div>
+
+  <div class="quote-block">
+    <p>« Les erreurs des autres sont le meilleur raccourci vers votre propre succès. Apprendre ce qu'il ne faut pas faire vous fait gagner des mois, voire des années. »</p>
+    <cite>— Principe du marketing de réseau</cite>
+  </div>
+
+  <!-- Compteur progression -->
+  <div class="erreur-counter">
+    <div>
+      <div class="ec-num" id="lu-count">0</div>
+      <div class="ec-label">erreurs assimilées sur 33</div>
+    </div>
+    <div class="ec-bar"><div class="ec-fill" id="lu-fill" style="width:0%"></div></div>
+    <div style="font-family:'Syne',sans-serif;font-size:var(--fs-xs);font-weight:700;color:var(--text2)" id="lu-pct">0%</div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="slbl">Filtrer par catégorie</div>
+  <div class="cat-filters">
+    <button class="cat-btn active" onclick="filterCat('all',this)">Toutes (33)</button>
+    <button class="cat-btn" onclick="filterCat('mindset',this)">🧠 Mindset</button>
+    <button class="cat-btn" onclick="filterCat('action',this)">⚡ Action</button>
+    <button class="cat-btn" onclick="filterCat('relation',this)">🤝 Relation</button>
+    <button class="cat-btn" onclick="filterCat('systeme',this)">🛠️ Système</button>
+    <button class="cat-btn" onclick="filterCat('mental',this)">💪 Mental</button>
+  </div>
+
+  <!-- Grille des 33 erreurs -->
+  <div class="erreurs-grid" id="erreurs-grid"></div>
+
+  <div class="slbl">Mes actions</div>
+  <ul class="checklist">
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai lu les 33 erreurs une première fois en entier</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai identifié les 3 erreurs dans lesquelles je me reconnais le plus</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai coché chaque erreur assimilée dans la grille ci-dessus</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai téléchargé le document pour y revenir régulièrement</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je suis prêt(e) à passer au Module 3 — Prospection Organique</li>
+  </ul>
+
+  <div class="nav-btns">
+    <a class="nav-btn nav-btn-prev" href="module-1-6.html">← Module 1</a>
+    <a class="nav-btn nav-btn-next" href="module-3a.html">Module 3a — La Liste de Noms →</a>
+  </div>
+
+</main>
+</div>
+
+<script src="search-index.js"></script>
+<script src="dd-app.js"></script>
+<script>
+ddInit('m2');
+
+/* ── DONNÉES 33 ERREURS ── */
+const ERREURS = [
+  { n:1,  cat:'relation', erreur:'Parler avant d\'être formé',                       solution:'Laisse ton sponsor s\'exprimer pendant que tu apprends en l\'écoutant.' },
+  { n:2,  cat:'relation', erreur:'Faire ses premiers rendez-vous tout seul',          solution:'Sois accompagné par un parrain expérimenté pour apprendre par l\'exemple.' },
+  { n:3,  cat:'mindset',  erreur:'Le syndrome de l\'imposteur',                       solution:'Sois convaincu que tu apportes de la valeur, même en apprenant.' },
+  { n:4,  cat:'mindset',  erreur:'Être trop excité',                                  solution:'Reste professionnel et posé pour inspirer confiance.' },
+  { n:5,  cat:'relation', erreur:'Ne pas être coachable',                             solution:'Sois ouvert aux conseils et applique les recommandations des leaders.' },
+  { n:6,  cat:'relation', erreur:'Écouter ceux qui ne savent pas de quoi ils parlent',solution:'Consulte uniquement ceux qui ont l\'expérience et les résultats.' },
+  { n:7,  cat:'relation', erreur:'Ne pas écouter ceux qui savent de quoi ils parlent',solution:'Écoute et mets en pratique les conseils des personnes compétentes.' },
+  { n:8,  cat:'systeme',  erreur:'Démarrer sans liste de contacts',                   solution:'Prépare une liste complète de contacts avant de commencer.' },
+  { n:9,  cat:'mindset',  erreur:'Pas de vision, pas d\'objectif, pas de pourquoi',   solution:'Définis clairement ta vision, tes objectifs et ton "pourquoi".' },
+  { n:10, cat:'systeme',  erreur:'Brûler les étapes',                                 solution:'Respecte chaque étape du processus, une à une.' },
+  { n:11, cat:'action',   erreur:'Le syndrome de "préparer, préparer"',               solution:'Passe rapidement à l\'action, même si tout n\'est pas parfait.' },
+  { n:12, cat:'systeme',  erreur:'Réinventer la roue',                                solution:'Utilise les systèmes existants qui ont déjà prouvé leur efficacité.' },
+  { n:13, cat:'relation', erreur:'L\'isolement',                                      solution:'Reste connecté à ton équipe et participe activement aux événements.' },
+  { n:14, cat:'mindset',  erreur:'Vouloir quitter son activité principale trop tôt',  solution:'Construis ton business en parallèle jusqu\'à ce qu\'il soit stable.' },
+  { n:15, cat:'mindset',  erreur:'Blâmer les autres',                                 solution:'Prends la responsabilité de tes résultats.' },
+  { n:16, cat:'mindset',  erreur:'Avoir des attentes trop importantes',               solution:'Sois réaliste et construis ton succès pas à pas.' },
+  { n:17, cat:'systeme',  erreur:'Le piège de la supervision',                        solution:'Responsabilise ton équipe au lieu de la surveiller constamment.' },
+  { n:18, cat:'systeme',  erreur:'Le manque de cadre et d\'organisation',             solution:'Crée une routine claire avec des objectifs hebdomadaires.' },
+  { n:19, cat:'action',   erreur:'Le manque de cohérence',                            solution:'Sois constant dans tes actions quotidiennes.' },
+  { n:20, cat:'mindset',  erreur:'Croire à la réussite rapide',                       solution:'Comprends que le succès vient avec du temps et de la persévérance.' },
+  { n:21, cat:'mindset',  erreur:'Des attentes irréalistes',                          solution:'Fixe-toi des objectifs atteignables et mesurables.' },
+  { n:22, cat:'mental',   erreur:'Croire à une réussite sans difficulté',             solution:'Accepte les obstacles comme partie intégrante du processus.' },
+  { n:23, cat:'action',   erreur:'Le manque d\'engagement',                           solution:'Sois pleinement investi dans ton activité.' },
+  { n:24, cat:'action',   erreur:'La procrastination',                                solution:'Agis dès maintenant sur les tâches importantes.' },
+  { n:25, cat:'mental',   erreur:'Le manque de confiance en soi',                     solution:'Développe ta confiance par la formation et l\'expérience.' },
+  { n:26, cat:'action',   erreur:'Un démarrage trop lent',                            solution:'Lance-toi rapidement et avec enthousiasme.' },
+  { n:27, cat:'action',   erreur:'Le manque de passage à l\'action',                  solution:'Fais des actions concrètes chaque jour.' },
+  { n:28, cat:'systeme',  erreur:'Le manque de formation',                            solution:'Forme-toi régulièrement pour progresser.' },
+  { n:29, cat:'mental',   erreur:'Être plus petit que ses problèmes',                 solution:'Adopte une posture de leader face aux difficultés.' },
+  { n:30, cat:'mental',   erreur:'Le manque de concentration',                        solution:'Concentre-toi sur une tâche à la fois avec discipline.' },
+  { n:31, cat:'mental',   erreur:'Rester trop longtemps focalisé sur les problèmes',  solution:'Cherche des solutions et passe à l\'action.' },
+  { n:32, cat:'relation', erreur:'Penser à soi avant de penser aux autres',           solution:'Sois centré sur l\'aide que tu apportes à ton équipe.' },
+  { n:33, cat:'systeme',  erreur:'Faire du social au lieu de faire du social business',solution:'Bâtis des relations avec une intention professionnelle et stratégique.' },
+];
+
+const CAT_LABELS = {
+  mindset:  { label:'🧠 Mindset',   cls:'cat-mindset' },
+  action:   { label:'⚡ Action',    cls:'cat-action' },
+  relation: { label:'🤝 Relation',  cls:'cat-relation' },
+  systeme:  { label:'🛠️ Système',  cls:'cat-systeme' },
+  mental:   { label:'💪 Mental',    cls:'cat-mental' },
+};
+
+function getLu(n){ return localStorage.getItem('dd_e'+n)==='1'; }
+function setLu(n,v){ localStorage.setItem('dd_e'+n, v?'1':'0'); }
+
+function toggleLu(n){
+  const val = !getLu(n);
+  setLu(n, val);
+  renderGrid(currentCat);
+  updateCounter();
+}
+
+function updateCounter(){
+  const total = 33;
+  const done = ERREURS.filter(e=>getLu(e.n)).length;
+  const pct = Math.round(done/total*100);
+  document.getElementById('lu-count').textContent = done;
+  document.getElementById('lu-fill').style.width = pct+'%';
+  document.getElementById('lu-pct').textContent = pct+'%';
+}
+
+let currentCat = 'all';
+
+function renderGrid(cat){
+  currentCat = cat;
+  const grid = document.getElementById('erreurs-grid');
+  const filtered = cat==='all' ? ERREURS : ERREURS.filter(e=>e.cat===cat);
+  grid.innerHTML = filtered.map(e => {
+    const lu = getLu(e.n);
+    const catInfo = CAT_LABELS[e.cat];
+    return `<div class="erreur-card${lu?' lu':''}" id="ec${e.n}">
+      <div class="ec-num-badge">${lu?'✓':e.n}</div>
+      <div class="ec-cat-tag ${catInfo.cls}">${catInfo.label}</div>
+      <div class="ec-body">
+        <div class="ec-erreur">❌ ${e.erreur}</div>
+        <div class="ec-solution">${e.solution}</div>
+        <div class="ec-check" onclick="toggleLu(${e.n})">
+          <div class="chk">${lu?'✓':''}</div>
+          <span>${lu?'Assimilée ✓':'Marquer comme assimilée'}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCat(cat, btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(cat);
+}
+
+/* INIT */
+renderGrid('all');
+updateCounter();
+</script>
+</body>
+</html>
