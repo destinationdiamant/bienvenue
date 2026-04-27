@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>1.5 — Mon Histoire Produit · Destination 💎</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dd-style.css">
+<style>
+/* Structure AVT/APR */
+.avt-apr {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  align-items: start;
+}
+@media(max-width:600px){ .avt-apr { grid-template-columns: 1fr; } }
+.avt-apr .arrow-col {
+  display: flex; align-items: center; justify-content: center;
+  padding-top: 2.5rem; font-size: 1.8rem; color: var(--vm);
+}
+@media(max-width:600px){ .avt-apr .arrow-col { padding: .5rem 0; font-size: 1.4rem; transform: rotate(90deg); } }
+.avt-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.avt-card .ac-hdr {
+  padding: .65rem 1rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: .78rem;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.avt-hdr-before { background: #FEE2E2; color: #991B1B; }
+.avt-hdr-after  { background: #D1FAE5; color: #065F46; }
+.avt-card textarea {
+  width: 100%; border: none; outline: none;
+  padding: .8rem 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); color: var(--text);
+  background: white; resize: none; line-height: 1.6;
+  min-height: 120px;
+}
+
+/* Structure histoire */
+.story-steps {
+  display: grid; gap: .8rem; margin: 1.2rem 0 1.5rem;
+}
+.story-step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: .85rem;
+  align-items: start;
+  box-shadow: var(--shadow);
+}
+.ss-num {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--vm), var(--vm2));
+  color: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: .85rem;
+  flex-shrink: 0;
+}
+.ss-content label {
+  display: block; font-family: 'Syne', sans-serif;
+  font-size: var(--fs-xs); font-weight: 700;
+  color: var(--vm); text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: .4rem;
+}
+.ss-content textarea {
+  width: 100%; border: 1.5px solid var(--border);
+  border-radius: 8px; padding: .55rem .8rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); color: var(--text);
+  background: white; outline: none; resize: none;
+  line-height: 1.55; transition: border .2s;
+}
+.ss-content textarea:focus { border-color: var(--vm); }
+
+/* Ressentis timeline */
+.ressenti-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin: 1.2rem 0 1.5rem;
+}
+@media(max-width:600px){ .ressenti-grid { grid-template-columns: 1fr; } }
+.ressenti-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.rc-hdr {
+  padding: .6rem .9rem;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: .75rem; text-transform: uppercase; letter-spacing: .06em;
+  display: flex; align-items: center; gap: .4rem;
+}
+.rc-30 { background: var(--vm-light); color: var(--vm2); }
+.rc-60 { background: #FEF3C7; color: #92400E; }
+.rc-120 { background: #D1FAE5; color: #065F46; }
+.ressenti-card textarea {
+  width: 100%; border: none; outline: none;
+  padding: .7rem .9rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); color: var(--text);
+  background: white; resize: none; line-height: 1.5;
+  min-height: 90px;
+}
+
+/* Script 2 min */
+.script-box {
+  background: linear-gradient(135deg, #1E0B40, #3B1F7A);
+  border-radius: 18px; padding: 2rem;
+  margin: 1.5rem 0; color: #fff;
+}
+.script-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; color: var(--gold); margin-bottom: 1rem;
+}
+.script-bubble {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px; padding: 1.1rem 1.3rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-base); font-style: italic;
+  color: rgba(255,255,255,.9); line-height: 1.7;
+}
+
+/* Note perso */
+.note-perso {
+  background: var(--gold-lt);
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: var(--radius); padding: 1.3rem 1.4rem;
+  margin: 1.5rem 0;
+}
+.note-perso label {
+  display: block; font-family: 'Syne', sans-serif;
+  font-size: var(--fs-xs); font-weight: 700;
+  color: var(--gold); text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: .5rem;
+}
+.note-perso textarea {
+  width: 100%; border: 1.5px solid rgba(201,168,76,.3);
+  border-radius: 8px; padding: .65rem .85rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-base); color: var(--text);
+  background: white; outline: none; resize: none;
+  line-height: 1.65; transition: border .2s;
+}
+.note-perso textarea:focus { border-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<script>function ddCheckPw(){var v=document.getElementById("pw-input").value;if(v==="Diamant"){localStorage.setItem("dd_auth","1");document.getElementById("pw-overlay").style.display="none";}else{document.getElementById("pw-err").style.display="block";document.getElementById("pw-input").value="";}}if(localStorage.getItem("dd_auth")==="1"){document.getElementById("pw-overlay").style.display="none";}document.addEventListener("keydown",function(e){if(e.key==="Enter")ddCheckPw();});</script>
+
+<div id="pw-overlay"><div class="pw-box"><span class="pw-gem">💎</span><h1 class="pw-title">Destination Diamant</h1><p class="pw-sub">Formation partenaire — Espace privé</p><input type="password" class="pw-input" id="pw-input" placeholder="Mot de passe" autocomplete="off"><button class="pw-btn" id="pw-btn" onclick="ddCheckPw()">Accéder à la formation →</button><p class="pw-err" id="pw-err">Mot de passe incorrect. Réessayez.</p></div></div>
+
+<div id="srch-ov"><div id="srch-box"><div class="srch-top"><span class="srch-icon">🔍</span><input type="text" id="srch-input" placeholder="Rechercher dans toute la formation…" oninput="ddDoSearch(this.value)" autocomplete="off"><button class="srch-close" onclick="ddCloseSrch()">✕</button></div><div id="srch-results"><div class="srch-hint">Tapez un mot-clé pour chercher dans tous les modules</div></div></div></div>
+
+<header>
+  <button class="hdr-menu-btn" onclick="ddToggleSidebar()"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="16" width="22" height="2" rx="1" fill="currentColor"/></svg></button>
+  <a class="hdr-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="hdr-spacer"></div>
+  <button class="hdr-btn" id="audio-btn" onclick="ddToggleAudio()">🔊 Écouter</button>
+  <button class="hdr-btn" onclick="ddOpenSrch()">🔍 Rechercher</button>
+</header>
+
+<div id="sb-overlay"></div>
+<div class="layout">
+
+<aside id="sidebar">
+  <a class="sb-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="sb-progress-label" id="sb-pct-label">0% complété</div>
+  <div class="sb-progress"><div class="sb-progress-fill" id="sb-pfill" style="width:0%"></div></div>
+  <div class="sb-group"><div class="sb-group-hdr open" onclick="ddToggleGroup(this)"><span class="sb-mod-num">01</span> Bienvenue — Mes Fondations<span class="sb-arrow">▶</span></div><div class="sb-items open">
+    <a class="sb-item" href="module-1-1.html"><span class="sb-item-num">1.1</span> Mon Engagement & Ma Décision<span class="sb-chk" data-id="m1-1" onclick="ddToggleChk(event,'m1-1')"></span></a>
+    <a class="sb-item" href="module-1-2.html"><span class="sb-item-num">1.2</span> Mon Pourquoi<span class="sb-chk" data-id="m1-2" onclick="ddToggleChk(event,'m1-2')"></span></a>
+    <a class="sb-item" href="module-1-3.html"><span class="sb-item-num">1.3</span> Mes Rêves & Objectifs SMART<span class="sb-chk" data-id="m1-3" onclick="ddToggleChk(event,'m1-3')"></span></a>
+    <a class="sb-item" href="module-1-4.html"><span class="sb-item-num">1.4</span> Ma Planification & Agenda<span class="sb-chk" data-id="m1-4" onclick="ddToggleChk(event,'m1-4')"></span></a>
+    <a class="sb-item active" href="module-1-5.html"><span class="sb-item-num">1.5</span> Mon Histoire Produit<span class="sb-chk" data-id="m1-5" onclick="ddToggleChk(event,'m1-5')"></span></a>
+    <a class="sb-item" href="module-1-6.html"><span class="sb-item-num">1.6</span> Histoire de l'Entreprise<span class="sb-chk" data-id="m1-6" onclick="ddToggleChk(event,'m1-6')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">02</span> Les 33 Erreurs<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-2.html"><span class="sb-item-num">2</span> Les 33 erreurs à éviter<span class="sb-chk" data-id="m2" onclick="ddToggleChk(event,'m2')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">03</span> Prospection Organique<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-3a.html"><span class="sb-item-num">3a</span> La Liste de Noms<span class="sb-chk" data-id="m3a" onclick="ddToggleChk(event,'m3a')"></span></a>
+    <a class="sb-item" href="module-3b.html"><span class="sb-item-num">3b</span> L'Édification<span class="sb-chk" data-id="m3b" onclick="ddToggleChk(event,'m3b')"></span></a>
+    <a class="sb-item" href="module-3c.html"><span class="sb-item-num">3c</span> L'Invitation<span class="sb-chk" data-id="m3c" onclick="ddToggleChk(event,'m3c')"></span></a>
+    <a class="sb-item" href="module-3d.html"><span class="sb-item-num">3d</span> Les Objections<span class="sb-chk" data-id="m3d" onclick="ddToggleChk(event,'m3d')"></span></a>
+    <a class="sb-item" href="module-3e.html"><span class="sb-item-num">3e</span> Bibliothèque & Culture MLM<span class="sb-chk" data-id="m3e" onclick="ddToggleChk(event,'m3e')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">04</span> Démarrage<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-4a.html"><span class="sb-item-num">4a</span> Inscription & Statut<span class="sb-chk" data-id="m4a" onclick="ddToggleChk(event,'m4a')"></span></a>
+    <a class="sb-item" href="module-4b.html"><span class="sb-item-num">4b</span> Adhésion, Pack & Z4F<span class="sb-chk" data-id="m4b" onclick="ddToggleChk(event,'m4b')"></span></a>
+    <a class="sb-item" href="module-4c.html"><span class="sb-item-num">4c</span> Fast Start<span class="sb-chk" data-id="m4c" onclick="ddToggleChk(event,'m4c')"></span></a>
+    <a class="sb-item" href="module-4d.html"><span class="sb-item-num">4d</span> Règles & Outils<span class="sb-chk" data-id="m4d" onclick="ddToggleChk(event,'m4d')"></span></a>
+    <a class="sb-item" href="module-4e.html"><span class="sb-item-num">4e</span> Inauguration<span class="sb-chk" data-id="m4e" onclick="ddToggleChk(event,'m4e')"></span></a>
+    <a class="sb-item" href="module-4f.html"><span class="sb-item-num">4f</span> Les Événements<span class="sb-chk" data-id="m4f" onclick="ddToggleChk(event,'m4f')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">4★</span> Les Outils<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-4bis.html"><span class="sb-item-num">4★</span> Mes Outils & Ressources<span class="sb-chk" data-id="m4bis" onclick="ddToggleChk(event,'m4bis')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">05</span> La Présentation & Closing</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">06</span> Plan de Rémunération</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">07</span> Prospection Réseaux Sociaux</div></div>
+</aside>
+
+<main id="main-content">
+
+  <div class="mod-hero">
+    <div class="mod-hero-badge">🌟 Module 1 · Chapitre 5</div>
+    <h1>Mon Histoire<br><em>Produit</em></h1>
+    <p class="mod-hero-sub">On ne peut parler avec authenticité que de ce qu'on a vécu. Votre témoignage personnel — vos vrais résultats — vaut plus que n'importe quel argument commercial.</p>
+  </div>
+
+  <div class="video-wrap">
+    <div class="video-label">🎬 Vidéo du chapitre</div>
+    <!-- REMPLACER par : <iframe class="video-iframe" src="https://www.youtube.com/embed/XXXXXXXX" allowfullscreen></iframe> -->
+    <div class="video-placeholder"><span class="vp-icon">▶️</span><span class="vp-txt">Vidéo à venir — remplacez ce bloc par un iframe YouTube</span></div>
+  </div>
+
+  <div class="action-bar">
+    <!-- REMPLACER href="#" par le lien Google Doc du chapitre -->
+    <a class="action-btn primary" href="#" target="_blank">📥 Télécharger le document</a>
+    <button class="action-btn" onclick="ddMarkDone('m1-5',this)">✅ Marquer comme lu</button>
+  </div>
+
+  <div class="slbl">Pourquoi votre histoire est votre meilleur outil</div>
+
+  <div class="quote-block">
+    <p>« 100 % des premiers tests de mes clients étaient en déséquilibre. Le test sanguin n'est pas une promesse — c'est une preuve. Pas d'effet placebo : des données concrètes sur votre biologie. »</p>
+    <cite>— Frédéric Pottecher, biologiste, Marseille 2026</cite>
+  </div>
+
+  <p>Les arguments, les chiffres, les études scientifiques — tout cela a son importance. Mais ce qui déclenche vraiment la confiance chez un prospect, c'est <strong>votre histoire personnelle authentique</strong>. Pas un discours. Pas une brochure. Ce que vous avez vécu, ressenti, mesuré.</p>
+
+  <div class="hl"><strong>La règle d'or :</strong> Être le produit du produit. Consommez les produits chaque jour, faites votre test de rééquilibrage, notez vos ressentis. Ce sont ces notes qui deviendront votre témoignage.</div>
+
+  <div class="slbl">Étape 1 — Le BalanceTest : votre point de départ</div>
+
+  <div class="cards-grid">
+    <div class="ccard"><span class="cc-icon">🩸</span><div class="cc-title">Piqûre du doigt</div><div class="cc-text">5 gouttes de sang sur la carte de test fournie dans votre kit. Simple, rapide, indolore.</div></div>
+    <div class="ccard"><span class="cc-icon">📬</span><div class="cc-title">Envoi au laboratoire</div><div class="cc-text">Le laboratoire Vitas, à Oslo, est entièrement indépendant. C'est cette indépendance qui garantit la crédibilité des résultats.</div></div>
+    <div class="ccard"><span class="cc-icon">📊</span><div class="cc-title">Résultats sous 10-15 jours</div><div class="cc-text">Votre ratio Oméga-6/Oméga-3 au niveau cellulaire. Un marqueur clé de l'équilibre et de l'inflammation chronique.</div></div>
+    <div class="ccard"><span class="cc-icon">🔄</span><div class="cc-title">Retest à 4 mois</div><div class="cc-text">Après 120 jours de protocole, un second test mesure l'évolution. C'est là que votre histoire prend toute sa puissance.</div></div>
+  </div>
+
+  <div class="slbl">Étape 2 — Avant / Après : mes ressentis notés</div>
+
+  <p>Notez ici votre situation avant de commencer le protocole, et ce que vous observez après. Ces notes sont privées — elles serviront à construire votre témoignage authentique.</p>
+
+  <div class="avt-apr">
+    <div class="avt-card">
+      <div class="ac-hdr avt-hdr-before">😔 Avant — Ma situation de départ</div>
+      <textarea id="avt-before" placeholder="Comment vous sentiez-vous avant ? Énergie, sommeil, digestion, douleurs, peau, récupération… Soyez précis et honnête." oninput="saveHistoire()"></textarea>
+    </div>
+    <div class="arrow-col">→</div>
+    <div class="avt-card">
+      <div class="ac-hdr avt-hdr-after">😊 Après — Ce que j'observe</div>
+      <textarea id="avt-after" placeholder="Ce que vous constatez après le protocole. Même les petits changements comptent — le sommeil, l'énergie, la clarté mentale…" oninput="saveHistoire()"></textarea>
+    </div>
+  </div>
+
+  <div class="slbl">Mon journal de ressentis — 30, 60, 120 jours</div>
+
+  <div class="ressenti-grid">
+    <div class="ressenti-card">
+      <div class="rc-hdr rc-30">📝 À 30 jours</div>
+      <textarea id="r-30" placeholder="Premiers ressentis après 1 mois de protocole…" oninput="saveHistoire()"></textarea>
+    </div>
+    <div class="ressenti-card">
+      <div class="rc-hdr rc-60">📝 À 60 jours</div>
+      <textarea id="r-60" placeholder="Ce que j'observe après 2 mois…" oninput="saveHistoire()"></textarea>
+    </div>
+    <div class="ressenti-card">
+      <div class="rc-hdr rc-120">📝 À 120 jours</div>
+      <textarea id="r-120" placeholder="Mon bilan complet + résultats du retest…" oninput="saveHistoire()"></textarea>
+    </div>
+  </div>
+  <button class="save-btn" onclick="saveHistoire()">💾 Sauvegarder mon journal</button>
+
+  <div class="slbl">Étape 3 — Construire mon histoire en 4 parties</div>
+
+  <p>Une bonne histoire produit suit toujours la même structure : contexte → problème → solution → résultat. Remplissez chaque partie ci-dessous pour construire votre témoignage en moins de 2 minutes.</p>
+
+  <div class="story-steps">
+    <div class="story-step">
+      <div class="ss-num">1</div>
+      <div class="ss-content">
+        <label>Mon contexte — Qui j'étais avant</label>
+        <textarea id="s1" rows="2" placeholder="ex : J'étais fatiguée en permanence, mon sommeil était chaotique, je faisais attention à mon alimentation mais sans résultats mesurables…" oninput="saveHistoire()"></textarea>
+      </div>
+    </div>
+    <div class="story-step">
+      <div class="ss-num">2</div>
+      <div class="ss-content">
+        <label>La découverte — Ce qui m'a convaincue de tester</label>
+        <textarea id="s2" rows="2" placeholder="ex : On m'a parlé d'un test sanguin qui mesure l'équilibre cellulaire. J'étais sceptique au départ mais les données m'ont interpellée…" oninput="saveHistoire()"></textarea>
+      </div>
+    </div>
+    <div class="story-step">
+      <div class="ss-num">3</div>
+      <div class="ss-content">
+        <label>Mon résultat de test — Ce que j'ai découvert</label>
+        <textarea id="s3" rows="2" placeholder="ex : Mon ratio était de 12/1 — très en déséquilibre. Même en mangeant sainement. Ça m'a choquée et motivée à agir." oninput="saveHistoire()"></textarea>
+      </div>
+    </div>
+    <div class="story-step" style="border:2px solid var(--gold)">
+      <div class="ss-num" style="background:linear-gradient(135deg,var(--gold),#E8C56A);color:#1E0B40">4</div>
+      <div class="ss-content">
+        <label>💎 Ma transformation — Ce que j'observe aujourd'hui</label>
+        <textarea id="s4" rows="3" placeholder="ex : Après 4 mois de protocole, mon ratio est passé à 4/1. Mon énergie a changé, mon sommeil s'est amélioré, et j'ai maintenant une preuve concrète à partager avec mes contacts…" oninput="saveHistoire()"></textarea>
+      </div>
+    </div>
+  </div>
+  <button class="save-btn" onclick="saveHistoire()">💾 Sauvegarder mon histoire</button>
+
+  <div class="slbl">Mon histoire en 2 minutes — version orale</div>
+
+  <div class="script-box">
+    <h3>🎙️ La structure en 2 minutes</h3>
+    <div class="script-bubble">
+      « Avant de commencer ce protocole, [votre situation]. J'avais entendu parler d'un test sanguin qui mesure l'équilibre au niveau cellulaire — pas un ressenti, une mesure concrète. Mon résultat m'a surprise : [votre résultat]. J'ai suivi le protocole pendant 4 mois. Aujourd'hui [votre transformation]. Ce qui m'a le plus convaincue, c'est de voir les chiffres évoluer — pas juste ressentir, mais mesurer. »
+    </div>
+  </div>
+
+  <div class="slbl">Ma version personnalisée à retenir</div>
+
+  <div class="note-perso">
+    <label>✍️ Mon histoire en 2 minutes — à mémoriser et pratiquer</label>
+    <textarea id="histoire-finale" rows="6" placeholder="Rédigez ici votre version complète, dans vos mots, à voix haute. Entraînez-vous jusqu'à pouvoir la raconter naturellement, sans hésiter." oninput="saveHistoire()"></textarea>
+  </div>
+  <button class="save-btn" onclick="saveHistoire()">💾 Sauvegarder ma version finale</button>
+
+  <div class="mbox">
+    <div class="mt">💡 Règles du témoignage authentique</div>
+    <div class="mtxt">
+      Ne faites jamais de promesses médicales — parlez toujours de votre expérience personnelle.<br>
+      Utilisez "j'ai observé" plutôt que "ça guérit".<br>
+      Un témoignage honnête et humble est toujours plus puissant qu'un discours de vente.<br>
+      Vos résultats sont les vôtres — ne les gonflez pas, ne les minimisez pas.
+    </div>
+  </div>
+
+  <div class="slbl">Mes actions</div>
+  <ul class="checklist">
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai fait mon BalanceTest personnel (ou je l'ai commandé)</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai rempli mon avant / après et commencé mon journal</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai construit mon histoire en 4 parties</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai rédigé ma version en 2 minutes et je la pratique à voix haute</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je consomme les produits chaque jour — je suis le produit du produit</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je suis prêt(e) à passer au chapitre suivant : Histoire de l'Entreprise</li>
+  </ul>
+
+  <div class="nav-btns">
+    <a class="nav-btn nav-btn-prev" href="module-1-4.html">← 1.4 Ma Planification</a>
+    <a class="nav-btn nav-btn-next" href="module-1-6.html">1.6 — Histoire de l'Entreprise →</a>
+  </div>
+
+</main>
+</div>
+
+<script src="search-index.js"></script>
+<script src="dd-app.js"></script>
+<script>
+ddInit('m1-5');
+
+const H_IDS = ['avt-before','avt-after','r-30','r-60','r-120','s1','s2','s3','s4','histoire-finale'];
+function saveHistoire(){
+  const d={};
+  H_IDS.forEach(k=>{const el=document.getElementById(k);if(el)d[k]=el.value;});
+  localStorage.setItem('dd_histoire',JSON.stringify(d));
+}
+function loadHistoire(){
+  const s=localStorage.getItem('dd_histoire');
+  if(!s)return;
+  const d=JSON.parse(s);
+  H_IDS.forEach(k=>{const el=document.getElementById(k);if(el&&d[k])el.value=d[k];});
+}
+loadHistoire();
+</script>
+</body>
+</html>

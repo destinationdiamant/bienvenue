@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>3b — L'Édification · Destination 💎</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dd-style.css">
+<style>
+/* Triangle de confiance */
+.triangle-wrap {
+  background: var(--vm-pale); border: 1px solid var(--vm-light);
+  border-radius: var(--radius); padding: 1.8rem;
+  text-align: center; margin: 1.5rem 0;
+}
+.triangle-wrap .tw-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-xs); color: var(--text2); margin-bottom: 1.3rem;
+}
+.tri-nodes {
+  display: flex; justify-content: center;
+  flex-wrap: wrap; gap: .8rem;
+}
+.tri-node {
+  width: 110px; height: 110px; border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .3rem;
+  color: #fff; font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: .78rem;
+}
+.tri-node .tn-icon { font-size: 1.5rem; }
+.tri-node .tn-sub { font-size: .6rem; opacity: .65; }
+.tn-vous  { background: linear-gradient(135deg, var(--vm), var(--vm2)); }
+.tn-pros  { background: linear-gradient(135deg, #1E40AF, #3B82F6); }
+.tn-exp   { background: linear-gradient(135deg, #065F46, #10B981); }
+.tri-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: var(--vm); align-self: center;
+}
+@media(max-width:500px){ .tri-arrow { transform: rotate(90deg); } }
+
+/* Principes clés */
+.principe-list { display: grid; gap: .7rem; margin: 1.2rem 0 1.5rem; }
+.principe-item {
+  display: grid; grid-template-columns: 40px 1fr;
+  gap: .9rem; align-items: start;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: .9rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+.pi-num {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--vm), var(--vm2));
+  color: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: .85rem; flex-shrink: 0;
+}
+.pi-content .pi-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: .88rem; color: var(--text); margin-bottom: .3rem;
+}
+.pi-content .pi-text {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); color: var(--text2); line-height: 1.6;
+}
+
+/* Scripts */
+.script-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 1rem;
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.sc-hdr {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .85rem 1.1rem; cursor: pointer;
+  background: var(--vm-pale); transition: background .15s;
+  user-select: none;
+}
+.sc-hdr:hover { background: var(--vm-light); }
+.sc-letter {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--vm); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: .85rem; flex-shrink: 0;
+}
+.sc-title-col .sc-name {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: .88rem; color: var(--text);
+}
+.sc-title-col .sc-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-xs); color: var(--text2); margin-top: .15rem;
+}
+.sc-arrow { margin-left: auto; font-size: .7rem; color: var(--text2); transition: transform .25s; }
+.sc-hdr.open .sc-arrow { transform: rotate(180deg); }
+.sc-body { display: none; padding: 1.1rem 1.2rem; border-top: 1px solid var(--border); }
+.sc-body.open { display: block; }
+.sc-context {
+  font-family: 'Syne', sans-serif; font-size: var(--fs-xs);
+  font-weight: 700; color: var(--vm); text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: .6rem;
+}
+.bubble {
+  background: linear-gradient(135deg, #1E0B40, #3B1F7A);
+  border-radius: 12px; padding: 1.1rem 1.3rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-base); font-style: italic;
+  color: rgba(255,255,255,.92); line-height: 1.75;
+  margin-bottom: .9rem;
+}
+.tip-box {
+  background: var(--gold-lt); border: 1px solid rgba(201,168,76,.25);
+  border-radius: 10px; padding: .8rem 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); color: var(--text); line-height: 1.6;
+}
+.tip-box strong { font-family: 'Syne', sans-serif; font-size: var(--fs-xs); font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: .3rem; }
+
+/* Erreurs édification */
+.erreur-edif {
+  display: grid; gap: .6rem; margin: 1.2rem 0 1.5rem;
+}
+.ee-item {
+  display: flex; align-items: flex-start; gap: .7rem;
+  background: #FEF2F2; border: 1px solid #FECACA;
+  border-radius: 10px; padding: .75rem 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: var(--fs-sm); line-height: 1.55; color: var(--text);
+}
+.ee-item::before { content: '✗'; color: #EF4444; font-weight: 700; flex-shrink: 0; margin-top: .1rem; }
+</style>
+</head>
+<body>
+
+<script>function ddCheckPw(){var v=document.getElementById("pw-input").value;if(v==="Diamant"){localStorage.setItem("dd_auth","1");document.getElementById("pw-overlay").style.display="none";}else{document.getElementById("pw-err").style.display="block";document.getElementById("pw-input").value="";}}if(localStorage.getItem("dd_auth")==="1"){document.getElementById("pw-overlay").style.display="none";}document.addEventListener("keydown",function(e){if(e.key==="Enter")ddCheckPw();});</script>
+
+<div id="pw-overlay"><div class="pw-box"><span class="pw-gem">💎</span><h1 class="pw-title">Destination Diamant</h1><p class="pw-sub">Formation partenaire — Espace privé</p><input type="password" class="pw-input" id="pw-input" placeholder="Mot de passe" autocomplete="off"><button class="pw-btn" id="pw-btn" onclick="ddCheckPw()">Accéder à la formation →</button><p class="pw-err" id="pw-err">Mot de passe incorrect. Réessayez.</p></div></div>
+
+<div id="srch-ov"><div id="srch-box"><div class="srch-top"><span class="srch-icon">🔍</span><input type="text" id="srch-input" placeholder="Rechercher dans toute la formation…" oninput="ddDoSearch(this.value)" autocomplete="off"><button class="srch-close" onclick="ddCloseSrch()">✕</button></div><div id="srch-results"><div class="srch-hint">Tapez un mot-clé pour chercher dans tous les modules</div></div></div></div>
+
+<header>
+  <button class="hdr-menu-btn" onclick="ddToggleSidebar()"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="16" width="22" height="2" rx="1" fill="currentColor"/></svg></button>
+  <a class="hdr-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="hdr-spacer"></div>
+  <button class="hdr-btn" id="audio-btn" onclick="ddToggleAudio()">🔊 Écouter</button>
+  <button class="hdr-btn" onclick="ddOpenSrch()">🔍 Rechercher</button>
+</header>
+
+<div id="sb-overlay"></div>
+<div class="layout">
+
+<aside id="sidebar">
+  <a class="sb-logo" href="index.html">Destination <span>💎</span></a>
+  <div class="sb-progress-label" id="sb-pct-label">0% complété</div>
+  <div class="sb-progress"><div class="sb-progress-fill" id="sb-pfill" style="width:0%"></div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">01</span> Bienvenue — Mes Fondations<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-1-1.html"><span class="sb-item-num">1.1</span> Mon Engagement & Ma Décision<span class="sb-chk" data-id="m1-1" onclick="ddToggleChk(event,'m1-1')"></span></a>
+    <a class="sb-item" href="module-1-2.html"><span class="sb-item-num">1.2</span> Mon Pourquoi<span class="sb-chk" data-id="m1-2" onclick="ddToggleChk(event,'m1-2')"></span></a>
+    <a class="sb-item" href="module-1-3.html"><span class="sb-item-num">1.3</span> Mes Rêves & Objectifs SMART<span class="sb-chk" data-id="m1-3" onclick="ddToggleChk(event,'m1-3')"></span></a>
+    <a class="sb-item" href="module-1-4.html"><span class="sb-item-num">1.4</span> Ma Planification & Agenda<span class="sb-chk" data-id="m1-4" onclick="ddToggleChk(event,'m1-4')"></span></a>
+    <a class="sb-item" href="module-1-5.html"><span class="sb-item-num">1.5</span> Mon Histoire Produit<span class="sb-chk" data-id="m1-5" onclick="ddToggleChk(event,'m1-5')"></span></a>
+    <a class="sb-item" href="module-1-6.html"><span class="sb-item-num">1.6</span> Histoire de l'Entreprise<span class="sb-chk" data-id="m1-6" onclick="ddToggleChk(event,'m1-6')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">02</span> Les 33 Erreurs<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-2.html"><span class="sb-item-num">2</span> Les 33 erreurs à éviter<span class="sb-chk" data-id="m2" onclick="ddToggleChk(event,'m2')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr open" onclick="ddToggleGroup(this)"><span class="sb-mod-num">03</span> Prospection Organique<span class="sb-arrow">▶</span></div><div class="sb-items open">
+    <a class="sb-item" href="module-3a.html"><span class="sb-item-num">3a</span> La Liste de Noms<span class="sb-chk" data-id="m3a" onclick="ddToggleChk(event,'m3a')"></span></a>
+    <a class="sb-item active" href="module-3b.html"><span class="sb-item-num">3b</span> L'Édification<span class="sb-chk" data-id="m3b" onclick="ddToggleChk(event,'m3b')"></span></a>
+    <a class="sb-item" href="module-3c.html"><span class="sb-item-num">3c</span> L'Invitation<span class="sb-chk" data-id="m3c" onclick="ddToggleChk(event,'m3c')"></span></a>
+    <a class="sb-item" href="module-3d.html"><span class="sb-item-num">3d</span> Les Objections<span class="sb-chk" data-id="m3d" onclick="ddToggleChk(event,'m3d')"></span></a>
+    <a class="sb-item" href="module-3e.html"><span class="sb-item-num">3e</span> Bibliothèque & Culture MLM<span class="sb-chk" data-id="m3e" onclick="ddToggleChk(event,'m3e')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">04</span> Démarrage<span class="sb-arrow">▶</span></div><div class="sb-items">
+    <a class="sb-item" href="module-4a.html"><span class="sb-item-num">4a</span> Inscription & Statut<span class="sb-chk" data-id="m4a" onclick="ddToggleChk(event,'m4a')"></span></a>
+    <a class="sb-item" href="module-4b.html"><span class="sb-item-num">4b</span> Adhésion, Pack & Z4F<span class="sb-chk" data-id="m4b" onclick="ddToggleChk(event,'m4b')"></span></a>
+    <a class="sb-item" href="module-4c.html"><span class="sb-item-num">4c</span> Fast Start<span class="sb-chk" data-id="m4c" onclick="ddToggleChk(event,'m4c')"></span></a>
+    <a class="sb-item" href="module-4d.html"><span class="sb-item-num">4d</span> Règles & Outils<span class="sb-chk" data-id="m4d" onclick="ddToggleChk(event,'m4d')"></span></a>
+    <a class="sb-item" href="module-4e.html"><span class="sb-item-num">4e</span> Inauguration<span class="sb-chk" data-id="m4e" onclick="ddToggleChk(event,'m4e')"></span></a>
+    <a class="sb-item" href="module-4f.html"><span class="sb-item-num">4f</span> Les Événements<span class="sb-chk" data-id="m4f" onclick="ddToggleChk(event,'m4f')"></span></a>
+  </div></div>
+  <div class="sb-group"><div class="sb-group-hdr" onclick="ddToggleGroup(this)"><span class="sb-mod-num">4★</span> Les Outils<span class="sb-arrow">▶</span></div><div class="sb-items"><a class="sb-item" href="module-4bis.html"><span class="sb-item-num">4★</span> Mes Outils & Ressources<span class="sb-chk" data-id="m4bis" onclick="ddToggleChk(event,'m4bis')"></span></a></div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">05</span> La Présentation & Closing</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">06</span> Plan de Rémunération</div></div>
+  <div class="sb-group"><div class="sb-group-hdr coming"><span class="sb-mod-num">07</span> Prospection Réseaux Sociaux</div></div>
+</aside>
+
+<main id="main-content">
+
+  <div class="mod-hero">
+    <div class="mod-hero-badge">🎯 Module 3 · Chapitre b</div>
+    <h1>L'<em>Édification</em></h1>
+    <p class="mod-hero-sub">L'édification, c'est l'art de transférer votre confiance vers un expert avant qu'il parle. Un appel à trois bien édifié vaut dix présentations solitaires.</p>
+  </div>
+
+  <div class="video-wrap">
+    <div class="video-label">🎬 Vidéo du chapitre</div>
+    <!-- REMPLACER par : <iframe class="video-iframe" src="https://www.youtube.com/embed/XXXXXXXX" allowfullscreen></iframe> -->
+    <div class="video-placeholder"><span class="vp-icon">▶️</span><span class="vp-txt">Vidéo à venir — remplacez ce bloc par un iframe YouTube</span></div>
+  </div>
+
+  <div class="action-bar">
+    <!-- REMPLACER href="#" par le lien Google Doc du chapitre -->
+    <a class="action-btn primary" href="#" target="_blank">📥 Télécharger le document</a>
+    <button class="action-btn" onclick="ddMarkDone('m3b',this)">✅ Marquer comme lu</button>
+  </div>
+
+  <div class="slbl">Qu'est-ce que l'édification ?</div>
+
+  <div class="quote-block">
+    <p>« Vous pouvez présenter un produit en ligne. Mais vous connectez les cœurs lorsque vous êtes avec des gens. »</p>
+    <cite>— Convention Oslo 2025</cite>
+  </div>
+
+  <p>L'édification est le processus par lequel vous présentez un expert ou votre sponsor à votre prospect, de façon à créer une <strong>autorité perçue</strong> avant même qu'il ait ouvert la bouche. Sans édification, votre prospect arrive neutre. Avec une bonne édification, il arrive en posture d'écoute et de confiance.</p>
+
+  <div class="hl"><strong>Le principe clé :</strong> Dans le marketing de réseau, vous êtes le lien de confiance. Votre rôle n'est pas de tout savoir — c'est de connecter les bonnes personnes. L'édification rend cette connexion efficace.</div>
+
+  <div class="slbl">Le Triangle de Confiance</div>
+
+  <div class="triangle-wrap">
+    <p class="tw-sub">Comprendre le transfert de crédibilité avant d'utiliser les scripts</p>
+    <div class="tri-nodes">
+      <div class="tri-node tn-vous"><span class="tn-icon">🙋</span>Vous<span class="tn-sub">Confiance</span></div>
+      <div class="tri-arrow">→</div>
+      <div class="tri-node tn-pros"><span class="tn-icon">👤</span>Prospect<span class="tn-sub">Curiosité</span></div>
+      <div class="tri-arrow">→</div>
+      <div class="tri-node tn-exp"><span class="tn-icon">⭐</span>Expert<span class="tn-sub">Autorité</span></div>
+    </div>
+  </div>
+
+  <p>Le prospect vous fait confiance. Quand vous édifiez l'expert, cette confiance se transfère sur lui. Le prospect écoute alors l'expert avec un niveau d'attention qu'il n'aurait jamais eu sans cette introduction. C'est de la physique relationnelle.</p>
+
+  <div class="slbl">Les 5 principes d'une bonne édification</div>
+
+  <div class="principe-list">
+    <div class="principe-item">
+      <div class="pi-num">1</div>
+      <div class="pi-content">
+        <div class="pi-title">Soyez sincère</div>
+        <div class="pi-text">N'inventez pas. Mettez en avant ce que vous admirez vraiment chez cet expert — son parcours, ses résultats, sa façon d'accompagner. La sincérité se sent, l'exagération aussi.</div>
+      </div>
+    </div>
+    <div class="principe-item">
+      <div class="pi-num">2</div>
+      <div class="pi-content">
+        <div class="pi-title">Créez de la rareté</div>
+        <div class="pi-text">"Il est très demandé", "je vais essayer de l'avoir", "il acceptera peut-être". Ces mots positionnent l'expert comme quelqu'un de valeur, pas comme quelqu'un qui attend votre appel.</div>
+      </div>
+    </div>
+    <div class="principe-item">
+      <div class="pi-num">3</div>
+      <div class="pi-content">
+        <div class="pi-title">Édifiez AVANT la rencontre</div>
+        <div class="pi-text">Faites l'édification au téléphone ou en face à face, toujours avant que l'expert arrive ou avant la mise en relation. Un expert qui s'édifie lui-même perd toute crédibilité.</div>
+      </div>
+    </div>
+    <div class="principe-item">
+      <div class="pi-num">4</div>
+      <div class="pi-content">
+        <div class="pi-title">Passez le relais et taisez-vous</div>
+        <div class="pi-text">Une fois l'introduction faite, votre rôle est terminé. Laissez l'expert parler. Ne l'interrompez pas, ne complétez pas ses phrases. Votre silence est votre plus grande contribution.</div>
+      </div>
+    </div>
+    <div class="principe-item">
+      <div class="pi-num">5</div>
+      <div class="pi-content">
+        <div class="pi-title">Édifiez aussi votre équipe</div>
+        <div class="pi-text">L'édification ne sert pas qu'à l'appel à trois. Édifiez vos partenaires devant leurs contacts. Édifiez les événements et les intervenants. Tout ce que vous valorisez gagne en puissance.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slbl">Scripts d'édification — Cliquez pour ouvrir</div>
+
+  <!-- Script A -->
+  <div class="script-card">
+    <div class="sc-hdr" onclick="toggleSc(this)">
+      <div class="sc-letter">A</div>
+      <div class="sc-title-col">
+        <div class="sc-name">Édification avant l'appel à 3</div>
+        <div class="sc-meta">À dire au prospect avant de le mettre en relation</div>
+      </div>
+      <span class="sc-arrow">▼</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-context">📞 Ce que vous dites au prospect AVANT</div>
+      <div class="bubble">« [Prénom], tu as posé d'excellentes questions. Je veux être sûr que tu aies les réponses les plus précises.<br><br>Je vais essayer de voir si je peux avoir 10 minutes avec mon partenaire senior, [Prénom Expert]. C'est quelqu'un qui a un succès remarquable — il développe des équipes à l'international. Il est très demandé, mais comme je lui ai parlé de toi, il acceptera peut-être de nous accorder un moment.<br><br>Sois bref et précis, car son temps est précieux. »</div>
+      <div class="tip-box"><strong>⚡ Pourquoi ça fonctionne</strong>"Essayer de l'avoir" + "très demandé" = le prospect arrive en posture d'écoute active, pas en mode défensif.</div>
+    </div>
+  </div>
+
+  <!-- Script B -->
+  <div class="script-card">
+    <div class="sc-hdr" onclick="toggleSc(this)">
+      <div class="sc-letter">B</div>
+      <div class="sc-title-col">
+        <div class="sc-name">L'introduction lors de l'appel à 3</div>
+        <div class="sc-meta">Passage de témoin — puis silence total</div>
+      </div>
+      <span class="sc-arrow">▼</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-context">🔄 Une fois tout le monde connecté</div>
+      <div class="bubble">« Bonjour [Expert], merci de prendre ce temps. Je te présente [Prospect], c'est la personne dont je t'ai parlé — [métier ou contexte rapide].<br><br>[Prospect], je te présente [Expert], un des leaders les plus respectés de notre réseau, qui m'accompagne et m'apprend énormément. »</div>
+      <div class="tip-box"><strong>🤫 Après l'introduction</strong>Taisez-vous complètement. Ne reprenez la parole que si l'expert vous la donne explicitement. Votre silence est un signe de respect et renforce l'autorité de l'expert.</div>
+    </div>
+  </div>
+
+  <!-- Script C -->
+  <div class="script-card">
+    <div class="sc-hdr" onclick="toggleSc(this)">
+      <div class="sc-letter">C</div>
+      <div class="sc-title-col">
+        <div class="sc-name">Édification en face à face</div>
+        <div class="sc-meta">Quand le sponsor arrive après le prospect</div>
+      </div>
+      <span class="sc-arrow">▼</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-context">🏠 Avant l'arrivée du sponsor (café, réunion maison)</div>
+      <div class="bubble">« Ah, je t'avais dit que j'essaierais d'avoir [Prénom] ce soir. Bonne nouvelle, il/elle a pu se libérer ! C'est quelqu'un qui fait ça depuis [durée] et qui a des résultats vraiment solides. Je lui fais totalement confiance. Il/elle va t'expliquer ça bien mieux que moi. »</div>
+      <div class="tip-box"><strong>🎯 La technique</strong>Faites arriver votre sponsor APRÈS votre prospect. Ainsi, le prospect vous voit accueillir quelqu'un d'important — pas quelqu'un qui attendait déjà là.</div>
+    </div>
+  </div>
+
+  <!-- Script D -->
+  <div class="script-card">
+    <div class="sc-hdr" onclick="toggleSc(this)">
+      <div class="sc-letter">D</div>
+      <div class="sc-title-col">
+        <div class="sc-name">Édification d'un événement ou zoom</div>
+        <div class="sc-meta">Pour donner envie d'y venir</div>
+      </div>
+      <span class="sc-arrow">▼</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-context">📅 Quand vous invitez à un zoom ou une réunion</div>
+      <div class="bubble">« Il y a une présentation en ligne mardi soir. Les intervenants font ça depuis des années, c'est professionnel et concret — pas du tout commercial. C'est 45 minutes. Je t'envoie le lien, réserve le créneau. »</div>
+      <div class="tip-box"><strong>💡 Règle</strong>Édifiez toujours l'événement avant d'envoyer le lien. Un lien brut sans contexte a 3 fois moins de chances d'aboutir à une présence.</div>
+    </div>
+  </div>
+
+  <div class="slbl">Les erreurs à éviter absolument</div>
+
+  <div class="erreur-edif">
+    <div class="ee-item">S'édifier soi-même devant le prospect ("Moi j'ai beaucoup de succès dans ce domaine…")</div>
+    <div class="ee-item">Exagérer les résultats de l'expert au point que le prospect soit déçu en le rencontrant</div>
+    <div class="ee-item">Parler pendant que l'expert présente — cela casse son autorité et votre crédibilité</div>
+    <div class="ee-item">Oublier d'édifier avant l'appel et tenter de le faire à la dernière seconde devant l'expert</div>
+    <div class="ee-item">Ne pas édifier du tout et se lancer seul dans une présentation improvisée</div>
+  </div>
+
+  <div class="quote-block">
+    <p>« Votre rôle = l'idée de force : si je le fais, tu peux le faire. Vous êtes le lien de confiance — c'est votre plus grande valeur. »</p>
+    <cite>— Principe fondamental du marketing de réseau</cite>
+  </div>
+
+  <div class="slbl">Mes actions</div>
+  <ul class="checklist">
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je comprends le principe du triangle de confiance</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai lu et mémorisé les 5 principes d'une bonne édification</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai pratiqué le script A à voix haute (édification avant appel)</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>J'ai pratiqué le script B (introduction lors de l'appel à 3)</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je sais ce qu'il ne faut pas faire lors d'une édification</li>
+    <li onclick="ddToggleCl(this)"><div class="cl-box"></div>Je suis prêt(e) à passer au chapitre suivant : L'Invitation</li>
+  </ul>
+
+  <div class="nav-btns">
+    <a class="nav-btn nav-btn-prev" href="module-3a.html">← 3a La Liste de Noms</a>
+    <a class="nav-btn nav-btn-next" href="module-3c.html">3c — L'Invitation →</a>
+  </div>
+
+</main>
+</div>
+
+<script src="search-index.js"></script>
+<script src="dd-app.js"></script>
+<script>
+ddInit('m3b');
+
+function toggleSc(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('open');
+}
+</script>
+</body>
+</html>
